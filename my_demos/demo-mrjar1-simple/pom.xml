@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>demo-mrjar1-simple</artifactId>
+    <version>0.0.55-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <maven.clean.failOnError>false</maven.clean.failOnError>
+        
+        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        
+        <mainClass>com.example.mrjar.demo1.App</mainClass>
+    </properties>
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repsy-lbnet-releases</id>
+            <url>https://repo.repsy.io/mvn/lilianne_blaze/lbnet-releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>repsy-lbnet-snapshots</id>
+            <url>https://repo.repsy.io/mvn/lilianne_blaze/lbnet-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.14</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fusesource.jansi</groupId>
+            <artifactId>jansi</artifactId>
+            <version>2.4.1</version>        
+        </dependency>
+		
+    </dependencies>
+
+    <build>
+
+        <plugins>
+
+            <plugin>
+                <groupId>lbnet.maven.plugins</groupId>
+                <artifactId>lbnet-maven-plugins-smallpom</artifactId>
+                <version>0.0.55-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <dumpWhen>both</dumpWhen>
+                    <configJarPlugin>auto</configJarPlugin>
+                    <configShadePlugin>auto</configShadePlugin>
+                    <configSourcePlugin>auto</configSourcePlugin>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>lbnet.maven.plugins</groupId>
+                <artifactId>lbnet-maven-plugins-mrjar</artifactId>
+                <version>0.0.55-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <javaVersions>8,11</javaVersions>
+                    <javaTestVersions>8,11</javaTestVersions>
+                    <dumpWhen>both</dumpWhen>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>lbnet.maven.plugins</groupId>
+                <artifactId>lbnet-maven-plugins-launch4j-wrp</artifactId>
+                <version>0.0.55-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <headerType>console</headerType>
+                    <requireAdmin>false</requireAdmin>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+
+    </build>
+
+</project>

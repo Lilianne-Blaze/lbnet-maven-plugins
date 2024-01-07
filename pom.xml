@@ -9,6 +9,8 @@
     <version>0.0.55-SNAPSHOT</version>
 
     <modules>
+        <module>lbnet-maven-plugins-shared</module>
+        <module>lbnet-maven-plugins-mrjar</module>
     </modules>
 
     <properties>
