@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>demo-mrjar1-simple</artifactId>
+    <artifactId>demo-mrjar2-simple</artifactId>
     <version>0.0.55-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -17,7 +17,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         
-        <exec.mainClass>com.example.mrjar.demo1.App</mainClass>
+        <exec.mainClass>com.example.mrjar.demo1.App</exec.mainClass>
     </properties>
     
     <pluginRepositories>
@@ -83,6 +83,19 @@
 
             <plugin>
                 <groupId>lbnet.maven.plugins</groupId>
+                <artifactId>lbnet-maven-plugins-smallpom</artifactId>
+                <version>0.0.55-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <dumpWhen>both</dumpWhen>
+                    <configJarPlugin>auto</configJarPlugin>
+                    <configShadePlugin>auto</configShadePlugin>
+                    <configSourcePlugin>auto</configSourcePlugin>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>lbnet.maven.plugins</groupId>
                 <artifactId>lbnet-maven-plugins-mrjar</artifactId>
                 <version>0.0.55-SNAPSHOT</version>
                 <extensions>true</extensions>
@@ -92,6 +105,19 @@
                     <dumpWhen>both</dumpWhen>
                 </configuration>
             </plugin>
+
+<!--
+            <plugin>
+                <groupId>lbnet.maven.plugins</groupId>
+                <artifactId>lbnet-maven-plugins-launch4j-wrp</artifactId>
+                <version>0.0.55-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <headerType>console</headerType>
+                    <requireAdmin>false</requireAdmin>
+                </configuration>
+            </plugin>
+			-->
 
         </plugins>
 

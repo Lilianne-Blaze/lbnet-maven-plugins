@@ -13,7 +13,7 @@ import lombok.With;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class PluginDefaultsInfo {
+public class PluginInfo {
 
     @NonNull
     private String groupId;

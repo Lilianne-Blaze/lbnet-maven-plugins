@@ -11,8 +11,8 @@ import org.apache.maven.project.MavenProject;
 public class PluginOrderFixer {
 
     public static void fixPluginOrder(MavenProject project) {
-        final String SHADE_PLUGIN_KEY = PluginDefaultsInfos.SHADE.getKey();
-        final String LAUNCH4J_PLUGIN_KEY = "com.akathist.maven.plugins.launch4j:launch4j-maven-plugin";
+        final String SHADE_PLUGIN_KEY = PluginInfos.SHADE.getKey();
+        final String LAUNCH4J_PLUGIN_KEY = PluginInfos.LAUNCH4J.getKey();
         final String LAUNCH4J_WRP_PLUGIN_KEY = "lbnet.maven.plugins:lbnet-maven-plugins-launch4j-wrp";
 
         // Shade must run before Launch4j

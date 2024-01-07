@@ -1,16 +1,20 @@
 package lbnet.maven.plugins.mrjar.to_sort;
 
+import lbnet.maven.plugins.shared.utils.MavenDebug;
 import lbnet.maven.plugins.shared.utils.MavenPluginUtils;
 import lbnet.maven.plugins.shared.utils.Xpp3DomUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.maven.model.Plugin;
 import org.apache.maven.model.PluginExecution;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 
+@Slf4j
 public class CompilerPluginUtils {
 
     public static PluginExecution addMrjExecution(Plugin compilerPlugin, PluginExecution peTemplate, int javaVersion,
             boolean testSources) {
         PluginExecution pe = peTemplate.clone();
+
         compilerPlugin.addExecution(pe);
 
         boolean isPre9 = javaVersion < 9;

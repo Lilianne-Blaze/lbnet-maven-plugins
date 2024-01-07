@@ -31,7 +31,7 @@ public class MavenPluginUtils {
         return Optional.empty();
     }
 
-    public static Plugin getInitPlugin(MavenProject project, PluginDefaultsInfo pluginInfo) {
+    public static Plugin getInitPlugin(MavenProject project, PluginInfo pluginInfo) {
         return getInitPluginByKey(project, pluginInfo.getKey(), pluginInfo.getRecommendedVersion());
     }
 
@@ -39,7 +39,7 @@ public class MavenPluginUtils {
      * Get an existing plugin, or create and return a new empty plugin.
      */
     public static Plugin getInitPluginByKey(MavenProject project, String key, String defVer) {
-        log.info("getInitPluginByKey(project,'{}','{}') called...", key, defVer);
+        log.debug("getInitPluginByKey(project,'{}','{}') called...", key, defVer);
         try {
             for (Plugin p : project.getBuild().getPlugins()) {
                 // log.info("Checking {}" + p);
@@ -60,7 +60,7 @@ public class MavenPluginUtils {
             }
 
             project.getBuild().addPlugin(p);
-            log.info("Created, returning {}", p);
+            log.debug("Created, returning {}", p);
             return p;
         } catch (Exception e) {
             throw new RuntimeException(e.toString(), e);
@@ -119,7 +119,8 @@ public class MavenPluginUtils {
 
     public static Optional<Xpp3Dom> getConfigurationOpt(Plugin plugin) {
         try {
-            return Optional.of((Xpp3Dom) plugin.getConfiguration());
+            Xpp3Dom confDom = (Xpp3Dom) plugin.getConfiguration();
+            return Optional.of(confDom);
         } catch (Exception e) {
         }
         return Optional.empty();

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>lbnet.maven.plugins</groupId>
+        <artifactId>lbnet-maven-plugins</artifactId>
+        <version>0.0.55-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>lbnet-maven-plugins-smallpom</artifactId>
+    <packaging>maven-plugin</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>lbnet-maven-plugins-shared</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        
+        <plugins>
+        
+            <plugin>
+                <groupId>org.eclipse.sisu</groupId>
+                <artifactId>sisu-maven-plugin</artifactId>
+                <version>0.3.5</version>
+                <executions>
+                    <execution>
+                        <id>generate-index</id>
+                        <goals>
+                            <goal>main-index</goal>
+                        </goals>
+                        <configuration>
+                            <detail>true</detail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>7.0.0</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/META-INF/git.properties</generateGitPropertiesFilename>
+                    <commitIdGenerationMode>full</commitIdGenerationMode>
+                    <includeOnlyProperties>
+                        <includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
+                        <includeOnlyProperty>^git.commit.id.(abbrev|full)$</includeOnlyProperty>
+                        <includeOnlyProperty>^git.branch$</includeOnlyProperty>
+                        <includeOnlyProperty>^git.commit.message.short$</includeOnlyProperty>
+                        <includeOnlyProperty>^git.commit.time$</includeOnlyProperty>
+                        <includeOnlyProperty>^git.closest.tag.name$</includeOnlyProperty>
+                    </includeOnlyProperties>
+                </configuration>
+            </plugin>
+            
+            
+            <plugin>
+                <groupId>com.igormaznitsa</groupId>
+                <artifactId>jcp</artifactId>
+                <version>7.1.1-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <id>preprocess-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>preprocess</goal>
+                        </goals>
+                        <configuration>
+                            <target>${project.build.directory}/generated-sources/preprocessed-java</target>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <allowWhitespaces>true</allowWhitespaces>
+                    <dontOverwriteSameContent>true</dontOverwriteSameContent>
+                    <keepComments>REMOVE_JCP_ONLY</keepComments>
+                    <unknownVarAsFalse>true</unknownVarAsFalse>
+                    <vars>
+                        <GIT_BRANCH>${git.branch}</GIT_BRANCH>
+                        <GIT_COMMIT_ID_FULL>${git.commit.id.full}</GIT_COMMIT_ID_FULL>
+                        <GIT_COMMIT_TIME>${git.commit.time}</GIT_COMMIT_TIME>
+                        <GIT_BUILD_TIME>${git.build.time}</GIT_BUILD_TIME>
+                        <GIT_BUILD_VERSION>${git.build.version}</GIT_BUILD_VERSION>
+                    </vars>
+                </configuration>
+            </plugin>
+      
+        </plugins>
+        
+    </build>
+    
+</project>

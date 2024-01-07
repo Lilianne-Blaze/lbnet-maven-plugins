@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import lbnet.maven.plugins.shared.utils.MavenDebug;
 import lbnet.maven.plugins.shared.utils.PluginConsts_old;
 import lbnet.maven.plugins.shared.utils.MavenPluginUtils;
 import lbnet.maven.plugins.shared.utils.ParamUtils;
@@ -95,8 +96,8 @@ public class MrjarExtension extends AbstractMavenLifecycleParticipant {
     }
 
     protected void processCompilerPlugin(Plugin plugin) {
-        PluginExecution peCompile = MavenPluginUtils.getExecutionByIdOpt(plugin, "default-compile").get();
-        PluginExecution peTestCompile = MavenPluginUtils.getExecutionByIdOpt(plugin, "default-testCompile").get();
+        PluginExecution peCompile = MavenPluginUtils.getInitExecution(plugin, "default-compile");
+        PluginExecution peTestCompile = MavenPluginUtils.getInitExecution(plugin, "default-testCompile");
 
         plugin.removeExecution(peCompile);
         plugin.removeExecution(peTestCompile);
